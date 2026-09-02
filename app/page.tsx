@@ -1,5 +1,6 @@
 /* oxlint-disable next/no-img-element -- Local AVIF assets are already compressed and have explicit dimensions. */
 import { SiteLink as Link } from '@/components/site-link';
+import { assetPath } from '@/lib/site-path';
 import { ServiceCards } from '@/components/service-cards';
 import { ProjectCta } from '@/components/project-cta';
 import { Reveal } from '@/components/reveal';
@@ -10,7 +11,7 @@ export default function Home() {
       <section className="hero" aria-labelledby="hero-title">
         <img
           className="hero-image"
-          src="/images/hero.avif"
+          src={assetPath('/images/hero.avif')}
           alt="A grand European interior with a sweeping staircase, classical moldings, and flowers"
           width="1535"
           height="997"
@@ -54,7 +55,7 @@ export default function Home() {
         </div>
         <div className="split-image">
           <img
-            src="/images/philosophy.avif"
+            src={assetPath('/images/philosophy.avif')}
             alt="Warm daylight and fresh flowers beside a classical marble fireplace"
             width="1235"
             height="819"
@@ -78,7 +79,7 @@ export default function Home() {
       >
         <div className="split-image">
           <img
-            src="/images/about.avif"
+            src={assetPath('/images/about.avif')}
             alt="An elegant room with a marble fireplace, gold mirror, cream sofa, and soft natural light"
             width="1832"
             height="1029"

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '@fontsource-variable/cormorant-garamond';
 import { requestOrigin } from '@/lib/metadata';
+import { assetPath } from '@/lib/site-path';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import './globals.css';
@@ -10,12 +11,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = 'Aloria | Timeless European-Inspired Interiors';
   const description =
     'Thoughtful online interior design inspired by timeless European elegance. Space planning, concept boards, furniture curation, and complete room design.';
-  const image = new URL('/og.png', origin).toString();
+  const image = new URL(assetPath('/og.png'), origin).toString();
   return {
     metadataBase: origin,
     title: { default: title, template: '%s | Aloria' },
     description,
-    icons: { icon: '/favicon.svg' },
+    icons: { icon: assetPath('/favicon.svg') },
     openGraph: {
       type: 'website',
       siteName: 'Aloria',

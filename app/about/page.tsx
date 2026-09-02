@@ -1,5 +1,6 @@
 /* oxlint-disable next/no-img-element -- Local AVIF assets are already compressed and have explicit dimensions. */
 import { studioPageMetadata } from '@/lib/metadata';
+import { assetPath } from '@/lib/site-path';
 import { ProjectCta } from '@/components/project-cta';
 import { Reveal } from '@/components/reveal';
 export async function generateMetadata() {
@@ -19,7 +20,7 @@ export default function AboutPage() {
       </section>
       <div className="about-panorama">
         <img
-          src="/images/about.avif"
+          src={assetPath('/images/about.avif')}
           alt="A light-filled European-inspired room with a classical fireplace, gold mirror, and warm cream sofa"
           width="1832"
           height="1029"

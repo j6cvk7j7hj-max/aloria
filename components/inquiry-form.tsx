@@ -38,12 +38,15 @@ const stageSchema = inquirySchema.partial().strict();
 export function InquiryForm() {
   const params = useSearchParams();
   const selected = params.get('service');
-  const [values, setValues] = useState<Inquiry>({
-    ...emptyInquiry,
-    service: serviceSlugs.includes(selected as Inquiry['service'])
+  const [values, setValues] = useState<Inquiry>(emptyInquiry);
+  const [serviceChosen, setServiceChosen] = useState(false);
+  // Static HTML has no query. Follow the hydrated query until the visitor
+  // explicitly chooses a service, then preserve their choice.
+  const service = serviceChosen
+    ? values.service
+    : serviceSlugs.includes(selected as Inquiry['service'])
       ? (selected as Inquiry['service'])
-      : 'not-sure',
-  });
+      : 'not-sure';
   const [files, setFiles] = useState<File[]>([]);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
   const [message, setMessage] = useState('');
@@ -108,6 +111,7 @@ export function InquiryForm() {
               );
               flushSync(() => {
                 setValues((current) => ({ ...current, ...staged }));
+                if (Object.hasOwn(staged, 'service')) setServiceChosen(true);
                 setFieldErrors({});
                 setMessage('');
               });
@@ -129,6 +133,7 @@ export function InquiryForm() {
 
   function update(key: keyof Inquiry, value: string) {
     if (uncertainRef.current) return;
+    if (key === 'service') setServiceChosen(true);
     setValues((current) => ({ ...current, [key]: value }));
     setFieldErrors((current) => ({ ...current, [key]: [] }));
   }
@@ -192,7 +197,7 @@ export function InquiryForm() {
     event.preventDefault();
     if (busyRef.current) return;
     setMessage('');
-    const parsed = inquirySchema.safeParse(values);
+    const parsed = inquirySchema.safeParse({ ...values, service });
     if (!parsed.success) {
       const errors = z.flattenError(parsed.error).fieldErrors;
       setFieldErrors(errors);
@@ -215,11 +220,14 @@ export function InquiryForm() {
     );
     files.forEach((file) => body.append('photos', file));
     try {
-      const response = await fetch('/api/inquiries', {
-        method: 'POST',
-        body,
-        signal: AbortSignal.timeout(45000),
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_INQUIRY_ENDPOINT || '/api/inquiries',
+        {
+          method: 'POST',
+          body,
+          signal: AbortSignal.timeout(45000),
+        },
+      );
       const result = (await response.json()) as {
         received?: boolean;
         error?: string;
@@ -262,9 +270,9 @@ export function InquiryForm() {
       </output>
     );
   const needsPlan =
-    values.service === 'space-planning' ||
-    values.service === 'signature-design' ||
-    values.service === 'not-sure';
+    service === 'space-planning' ||
+    service === 'signature-design' ||
+    service === 'not-sure';
   return (
     <form
       ref={formRef}
@@ -304,7 +312,7 @@ export function InquiryForm() {
             <NativeSelect
               id="service"
               name="service"
-              value={values.service}
+              value={service}
               onChange={(event) => update('service', event.target.value)}
               required
               aria-invalid={Boolean(fieldErrors.service?.length)}

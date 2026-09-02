@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import { SiteLink as Link } from '@/components/site-link';
 import { requestOrigin } from '@/lib/metadata';
+import { assetPath, siteHref } from '@/lib/site-path';
 import { notFound } from 'next/navigation';
 import { services } from '@/lib/services';
 import { Reveal } from '@/components/reveal';
@@ -18,12 +19,18 @@ export async function generateMetadata({
   const service = services.find((item) => item.slug === slug);
   if (!service) return {};
   const image = new URL(
-    `/images/${service.slug}.avif`,
+    assetPath(`/images/${service.slug}.avif`),
     await requestOrigin(),
   ).toString();
   return {
     title: service.title,
     description: service.description,
+    alternates: {
+      canonical: new URL(
+        siteHref(`/services/${service.slug}`),
+        await requestOrigin(),
+      ).toString(),
+    },
     openGraph: {
       title: `${service.title} | Aloria`,
       description: service.description,
@@ -66,7 +73,7 @@ export default async function ServicePage({
         </div>
         <div className="service-hero-image">
           <img
-            src={`/images/${service.slug}.avif`}
+            src={assetPath(`/images/${service.slug}.avif`)}
             alt={service.alt}
             width="586"
             height="436"

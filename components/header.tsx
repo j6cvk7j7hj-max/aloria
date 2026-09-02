@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { SiteLink as Link } from '@/components/site-link';
 import { usePathname } from 'next/navigation';
+import { localPathname } from '@/lib/site-path';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,7 +22,7 @@ const navigation = [
 ];
 
 export function Header() {
-  const pathname = usePathname();
+  const pathname = localPathname(usePathname());
   const [open, setOpen] = useState(false);
   const active = (url: string) =>
     url === '/' ? pathname === '/' : pathname.startsWith(url);

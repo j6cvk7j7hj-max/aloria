@@ -1,6 +1,7 @@
 /* oxlint-disable next/no-img-element -- Local AVIF assets are already compressed and have explicit dimensions. */
 import { SiteLink as Link } from '@/components/site-link';
 import { services } from '@/lib/services';
+import { assetPath } from '@/lib/site-path';
 
 export function ServiceCards() {
   return (
@@ -14,7 +15,7 @@ export function ServiceCards() {
             aria-hidden="true"
           >
             <img
-              src={`/images/${service.slug}.avif`}
+              src={assetPath(`/images/${service.slug}.avif`)}
               alt=""
               width="586"
               height="436"

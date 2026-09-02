@@ -13,6 +13,16 @@ pnpm dev
 
 The preview runs at http://localhost:3000. `pnpm build` produces the Cloudflare Worker and static assets. `pnpm exec tsc --noEmit` checks types.
 
+## GitHub Pages
+
+The public website is [Aloria on GitHub Pages](https://j6cvk7j7hj-max.github.io/aloria/).
+
+The `Deploy Aloria to GitHub Pages` workflow builds and publishes the website on every push to `main`. Pages must use **GitHub Actions** as its publishing source. Publishing the repository root directly displays this README instead of the website.
+
+`pnpm build:pages` exports all eight pages to `dist/client`, with links, images, fonts, and metadata configured for `/aloria/`. Only that built folder is published. The normal `pnpm build` remains the server build for Sites.
+
+GitHub Pages hosts static files, so the inquiry form sends requests to the existing Sites API. That API allows this GitHub Pages origin and continues to keep submissions and photos in private D1/R2 storage. Keep the Sites backend available for inquiries; GitHub Pages does not contain the database or uploaded photos.
+
 ## Pages
 
 Home, Services, About Aloria, Contact, and individual pages for Space Planning, Concept Board, Furniture Curation, and Signature Design. Service copy lives in `lib/services.ts`. Original brand imagery is in `public/images`; the generated social card is `public/og.png`.

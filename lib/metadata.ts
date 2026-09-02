@@ -1,6 +1,10 @@
 import { headers } from 'next/headers';
+import { assetPath, siteHref } from '@/lib/site-path';
 
 export async function requestOrigin() {
+  // Static exports have no incoming request from which to read a Host header.
+  if (process.env.NEXT_PUBLIC_SITE_ORIGIN)
+    return new URL(process.env.NEXT_PUBLIC_SITE_ORIGIN);
   // Sites routes the direct Host header to this site. Do not use forwarded-host headers.
   const host = (await headers()).get('host');
   if (!host || !/^[a-z0-9.-]+(?::[0-9]+)?$/i.test(host))
@@ -16,17 +20,18 @@ export async function studioPageMetadata(
 ): Promise<import('next').Metadata> {
   const origin = await requestOrigin();
   const fullTitle = title.includes('Aloria') ? title : `${title} | Aloria`;
-  const image = new URL('/og.png', origin).toString();
+  const image = new URL(assetPath('/og.png'), origin).toString();
+  const canonical = new URL(siteHref(path), origin).toString();
   return {
     title: { absolute: fullTitle },
     description,
-    alternates: { canonical: new URL(path, origin).toString() },
+    alternates: { canonical },
     openGraph: {
       type: 'website',
       siteName: 'Aloria',
       title: fullTitle,
       description,
-      url: new URL(path, origin).toString(),
+      url: canonical,
       images: [
         {
           url: image,

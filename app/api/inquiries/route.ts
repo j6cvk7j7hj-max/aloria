@@ -2,8 +2,32 @@ import { z } from 'zod';
 import { getDatabase, getPhotoStorage } from '@/db';
 import { inquirySchema, photoLimits, photoTypes } from '@/lib/inquiry';
 
-const json = (body: unknown, status = 200) =>
-  Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
+const pagesOrigin = 'https://j6cvk7j7hj-max.github.io';
+
+function allowsOrigin(request: Request) {
+  const origin = request.headers.get('Origin');
+  return (
+    !origin || origin === new URL(request.url).origin || origin === pagesOrigin
+  );
+}
+
+function responseHeaders(request: Request) {
+  const headers = new Headers({ 'Cache-Control': 'no-store', Vary: 'Origin' });
+  const origin = request.headers.get('Origin');
+  if (origin && allowsOrigin(request))
+    headers.set('Access-Control-Allow-Origin', origin);
+  return headers;
+}
+
+export function OPTIONS(request: Request) {
+  const headers = responseHeaders(request);
+  if (!allowsOrigin(request))
+    return new Response(null, { status: 403, headers });
+  headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  headers.set('Access-Control-Allow-Headers', 'Content-Type');
+  headers.set('Access-Control-Max-Age', '86400');
+  return new Response(null, { status: 204, headers });
+}
 const MAX_BODY = 16 * 1024 * 1024;
 function imageSignature(bytes: Uint8Array, type: string) {
   const ascii = (start: number, end: number) =>
@@ -26,8 +50,9 @@ function imageSignature(bytes: Uint8Array, type: string) {
   return false;
 }
 export async function POST(request: Request) {
-  const origin = request.headers.get('Origin');
-  if (origin && origin !== new URL(request.url).origin)
+  const json = (body: unknown, status = 200) =>
+    Response.json(body, { status, headers: responseHeaders(request) });
+  if (!allowsOrigin(request))
     return json(
       { error: 'Please submit your inquiry from this website.' },
       403,
