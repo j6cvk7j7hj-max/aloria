@@ -1,4 +1,5 @@
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const staticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === 'true';
 
 export function assetPath(path: string) {
   if (
@@ -13,7 +14,8 @@ export function assetPath(path: string) {
 }
 
 export function siteHref(href: string) {
-  if (!basePath || !href.startsWith('/') || href.startsWith('//')) return href;
+  if (!staticExport || !href.startsWith('/') || href.startsWith('//'))
+    return href;
   const url = new URL(href, 'https://aloria.invalid');
   const path = assetPath(url.pathname);
   return `${path.endsWith('/') ? path : `${path}/`}${url.search}${url.hash}`;

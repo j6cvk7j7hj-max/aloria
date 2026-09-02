@@ -15,13 +15,13 @@ The preview runs at http://localhost:3000. `pnpm build` produces the Cloudflare 
 
 ## GitHub Pages
 
-The public website is [Aloria on GitHub Pages](https://j6cvk7j7hj-max.github.io/aloria/).
+The production domain is [Aloria](https://aloriadesign.com/), hosted on GitHub Pages. Its DNS must point to GitHub Pages before the custom address will serve the website.
 
 The `Deploy Aloria to GitHub Pages` workflow builds and publishes the website on every push to `main`. Pages must use **GitHub Actions** as its publishing source. Publishing the repository root directly displays this README instead of the website.
 
-`pnpm build:pages` exports all eight pages to `dist/client`, with links, images, fonts, and metadata configured for `/aloria/`. Only that built folder is published. The normal `pnpm build` remains the server build for Sites.
+`pnpm build:pages` exports all eight pages to `dist/client`, with links, images, fonts, and metadata configured for the root of `aloriadesign.com`. Only that built folder is published. The normal `pnpm build` remains the server build for Sites.
 
-GitHub Pages hosts static files, so the inquiry form sends requests to the existing Sites API. That API allows this GitHub Pages origin and continues to keep submissions and photos in private D1/R2 storage. Keep the Sites backend available for inquiries; GitHub Pages does not contain the database or uploaded photos.
+GitHub Pages hosts static files, so the inquiry form sends requests to the existing Sites API. That API allows the HTTPS custom domain, its `www` variant, and the original GitHub Pages origin, and continues to keep submissions and photos in private D1/R2 storage. Keep the Sites backend available for inquiries; GitHub Pages does not contain the database or uploaded photos.
 
 ## Pages
 

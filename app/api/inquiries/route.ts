@@ -2,12 +2,18 @@ import { z } from 'zod';
 import { getDatabase, getPhotoStorage } from '@/db';
 import { inquirySchema, photoLimits, photoTypes } from '@/lib/inquiry';
 
-const pagesOrigin = 'https://j6cvk7j7hj-max.github.io';
+const websiteOrigins = new Set([
+  'https://aloriadesign.com',
+  'https://www.aloriadesign.com',
+  'https://j6cvk7j7hj-max.github.io',
+]);
 
 function allowsOrigin(request: Request) {
   const origin = request.headers.get('Origin');
   return (
-    !origin || origin === new URL(request.url).origin || origin === pagesOrigin
+    !origin ||
+    origin === new URL(request.url).origin ||
+    websiteOrigins.has(origin)
   );
 }
 

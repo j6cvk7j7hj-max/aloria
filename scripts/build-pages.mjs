@@ -8,13 +8,14 @@ import {
 } from 'node:fs';
 import { join } from 'node:path';
 
-const origin = 'https://j6cvk7j7hj-max.github.io';
-const basePath = '/aloria';
+const origin = 'https://aloriadesign.com';
+const basePath = '';
 const result = spawnSync('vinext', ['build'], {
   stdio: 'inherit',
   env: {
     ...process.env,
     ALORIA_GITHUB_PAGES: 'true',
+    NEXT_PUBLIC_STATIC_EXPORT: 'true',
     NEXT_PUBLIC_BASE_PATH: basePath,
     NEXT_PUBLIC_SITE_ORIGIN: origin,
     NEXT_PUBLIC_INQUIRY_ENDPOINT:
