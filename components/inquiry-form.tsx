@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
+import { SiteLink as Link } from '@/components/site-link';
 import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';

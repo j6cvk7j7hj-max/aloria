@@ -1,12 +1,15 @@
 /* oxlint-disable next/no-img-element -- Local AVIF assets are already compressed and have explicit dimensions. */
-import type { Metadata } from 'next';
+import { studioPageMetadata } from '@/lib/metadata';
 import { ProjectCta } from '@/components/project-cta';
 import { Reveal } from '@/components/reveal';
-export const metadata: Metadata = {
-  title: 'About Aloria',
-  description:
+export async function generateMetadata() {
+  return studioPageMetadata(
+    'About Aloria',
     'Meet Mia, founder of Aloria, an online interior design studio inspired by timeless European elegance, thoughtful planning, and warm natural materials.',
-};
+    '/about',
+  );
+}
+
 export default function AboutPage() {
   return (
     <main id="main-content">

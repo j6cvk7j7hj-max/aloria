@@ -1,5 +1,5 @@
 /* oxlint-disable next/no-img-element -- Local AVIF assets are already compressed and have explicit dimensions. */
-import Link from 'next/link';
+import { SiteLink as Link } from '@/components/site-link';
 import { services } from '@/lib/services';
 
 export function ServiceCards() {

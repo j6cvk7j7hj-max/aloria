@@ -1,6 +1,6 @@
 /* oxlint-disable next/no-img-element -- Local AVIF assets are already compressed and have explicit dimensions. */
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { SiteLink as Link } from '@/components/site-link';
 import { requestOrigin } from '@/lib/metadata';
 import { notFound } from 'next/navigation';
 import { services } from '@/lib/services';

@@ -35,4 +35,8 @@ Self-hosted Cormorant Garamond, warm ivory and brown, square buttons, original b
 
 ## Remaining studio details
 
-Add Mia’s real studio email, Instagram, and Pinterest links once supplied. Pricing and a measurement guide can be added when ready. The initial hosted preview is private; public launch and a custom domain are separate choices.
+Add Mia’s real studio email, Instagram, and Pinterest links once supplied. Pricing and a measurement guide can be added when ready. The website is public at https://aloria-interiors.glossy-bison-4514.chatgpt.site. A custom domain can be connected separately.
+
+## Navigation
+
+SiteLink uses native document links. This avoids a production-only dynamic-import failure in the current vinext client router while preserving keyboard, touch, query parameters, and navigation without JavaScript.

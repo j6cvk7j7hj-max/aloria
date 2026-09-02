@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { SiteLink as Link } from '@/components/site-link';
 export default function NotFound() {
   return (
     <main id="main-content" className="page-intro not-found">

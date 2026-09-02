@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { SiteLink as Link } from '@/components/site-link';
 import { services } from '@/lib/services';
 export function Footer() {
   return (

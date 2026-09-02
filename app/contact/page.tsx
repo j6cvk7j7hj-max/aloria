@@ -1,11 +1,14 @@
-import type { Metadata } from 'next';
+import { studioPageMetadata } from '@/lib/metadata';
 import { Suspense } from 'react';
 import { InquiryForm } from '@/components/inquiry-form';
-export const metadata: Metadata = {
-  title: 'Begin Your Project',
-  description:
+export async function generateMetadata() {
+  return studioPageMetadata(
+    'Begin Your Project',
     'Tell Aloria about your space. Begin your online interior design project with a thoughtful, personal approach.',
-};
+    '/contact',
+  );
+}
+
 export default function ContactPage() {
   return (
     <main id="main-content" className="contact-page section-container">

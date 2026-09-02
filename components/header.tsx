@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { SiteLink as Link } from '@/components/site-link';
 import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
