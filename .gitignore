@@ -25,3 +25,12 @@ coverage/
 .tools/
 .idea/
 .vscode/
+
+# Sites local runtime
+.wrangler/
+.vinext/
+.dev.vars
+.openai/.cache/
+*.tsbuildinfo
+
+.pnpm-store/
