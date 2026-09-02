@@ -3,18 +3,33 @@ import { studioPageMetadata } from '@/lib/metadata';
 import { assetPath } from '@/lib/site-path';
 import { ProjectCta } from '@/components/project-cta';
 import { Reveal } from '@/components/reveal';
-export async function generateMetadata() {
-  return studioPageMetadata(
-    'About Aloria',
-    'Meet Mia, founder of Aloria, an online interior design studio inspired by timeless European elegance, thoughtful planning, and warm natural materials.',
-    '/about',
-  );
+import { Breadcrumbs } from '@/components/breadcrumbs';
+import { PageStructuredData } from '@/components/structured-data';
+
+const title = 'About Aloria | Florida Online Interior Design Studio';
+const description =
+  'Meet Mia, founder of Aloria, a Florida-based online interior design studio bringing European-inspired rooms, thoughtful layouts, and warm materials to homes nationwide.';
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'About Aloria', path: '/about' },
+];
+
+export function generateMetadata() {
+  return studioPageMetadata(title, description, '/about');
 }
 
 export default function AboutPage() {
   return (
     <main id="main-content">
+      <PageStructuredData
+        path="/about"
+        name={title}
+        description={description}
+        type="AboutPage"
+        breadcrumbs={breadcrumbs}
+      />
       <section className="page-intro about-intro">
+        <Breadcrumbs items={breadcrumbs} />
         <p className="section-label">ABOUT ALORIA</p>
         <h1>Thoughtful interiors inspired by timeless European elegance.</h1>
       </section>
@@ -37,12 +52,14 @@ export default function AboutPage() {
         </Reveal>
         <div>
           <p>
-            Hi, I’m Mia, founder of Aloria. My approach to interior design is
-            rooted in a love of timeless architecture, thoughtful space
-            planning, warm natural materials, and interiors that feel refined
-            without sacrificing comfort. I created Aloria to offer approachable
-            online design services that help clients make confident decisions
-            and create homes that feel considered, personal, and lasting.
+            Hi, I’m Mia, founder of Aloria, an online interior design studio
+            based in Florida and serving clients nationwide. My approach to
+            interior design is rooted in a love of timeless architecture,
+            thoughtful space planning, warm natural materials, and interiors
+            that feel refined without sacrificing comfort. I created Aloria to
+            offer approachable online design services that help clients make
+            confident decisions and create homes that feel considered, personal,
+            and lasting.
           </p>
           <p>
             Beautiful interiors should feel personal, functional, and enduring

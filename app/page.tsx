@@ -4,10 +4,23 @@ import { assetPath } from '@/lib/site-path';
 import { ServiceCards } from '@/components/service-cards';
 import { ProjectCta } from '@/components/project-cta';
 import { Reveal } from '@/components/reveal';
+import { PageStructuredData } from '@/components/structured-data';
+import { site, studioPageMetadata } from '@/lib/metadata';
+
+const title = 'Florida Online Interior Design Studio';
+
+export function generateMetadata() {
+  return studioPageMetadata(title, site.description, '/');
+}
 
 export default function Home() {
   return (
     <main id="main-content">
+      <PageStructuredData
+        path="/"
+        name={title}
+        description={site.description}
+      />
       <section className="hero" aria-labelledby="hero-title">
         <img
           className="hero-image"
@@ -94,12 +107,13 @@ export default function Home() {
             </h2>
           </Reveal>
           <p>
-            Aloria is an online interior design studio inspired by timeless
-            European elegance. Every project begins with thoughtful planning,
-            balancing beauty, comfort, and functionality to create spaces that
-            feel refined, personal, and enduring. Whether redesigning a single
-            room or starting fresh, our goal is to help clients create homes
-            they will love for years to come.
+            Aloria is an online interior design studio based in Florida, serving
+            clients nationwide with a timeless, European-inspired approach.
+            Every project begins with thoughtful planning, balancing beauty,
+            comfort, and functionality to create spaces that feel refined,
+            personal, and enduring. Whether redesigning a single room or
+            starting fresh, our goal is to help clients create homes they will
+            love for years to come.
           </p>
           <Link className="outline-button" href="/about">
             LEARN MORE <span aria-hidden="true">→</span>

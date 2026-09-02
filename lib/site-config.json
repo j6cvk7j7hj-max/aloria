@@ -1,0 +1,15 @@
+{
+  "name": "Aloria",
+  "origin": "https://aloriadesign.com",
+  "description": "Aloria is a Florida-based online interior design studio offering space planning, concept boards, furniture curation, and complete room design nationwide.",
+  "routes": [
+    "/",
+    "/services/",
+    "/services/space-planning/",
+    "/services/concept-board/",
+    "/services/furniture-curation/",
+    "/services/signature-design/",
+    "/about/",
+    "/contact/"
+  ]
+}

@@ -1,11 +1,13 @@
 /* oxlint-disable next/no-img-element -- Local AVIF assets are already compressed and have explicit dimensions. */
 import type { Metadata } from 'next';
 import { SiteLink as Link } from '@/components/site-link';
-import { requestOrigin } from '@/lib/metadata';
-import { assetPath, siteHref } from '@/lib/site-path';
+import { studioPageMetadata } from '@/lib/metadata';
+import { assetPath } from '@/lib/site-path';
 import { notFound } from 'next/navigation';
 import { services } from '@/lib/services';
 import { Reveal } from '@/components/reveal';
+import { Breadcrumbs } from '@/components/breadcrumbs';
+import { PageStructuredData } from '@/components/structured-data';
 
 export function generateStaticParams() {
   return services.map(({ slug }) => ({ slug }));
@@ -18,31 +20,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = services.find((item) => item.slug === slug);
   if (!service) return {};
-  const image = new URL(
-    assetPath(`/images/${service.slug}.avif`),
-    await requestOrigin(),
-  ).toString();
-  return {
-    title: service.title,
-    description: service.description,
-    alternates: {
-      canonical: new URL(
-        siteHref(`/services/${service.slug}`),
-        await requestOrigin(),
-      ).toString(),
+  return studioPageMetadata(
+    service.seoTitle,
+    service.seoDescription,
+    `/services/${service.slug}`,
+    {
+      path: `/images/${service.slug}.avif`,
+      width: 586,
+      height: 436,
+      alt: service.alt,
     },
-    openGraph: {
-      title: `${service.title} | Aloria`,
-      description: service.description,
-      images: [{ url: image, width: 586, height: 436, alt: service.alt }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${service.title} | Aloria`,
-      description: service.description,
-      images: [image],
-    },
-  };
+  );
 }
 export default async function ServicePage({
   params,
@@ -52,18 +40,31 @@ export default async function ServicePage({
   const { slug } = await params;
   const service = services.find((item) => item.slug === slug);
   if (!service) notFound();
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: service.title, path: `/services/${service.slug}` },
+  ];
   return (
     <main id="main-content">
+      <PageStructuredData
+        path={`/services/${service.slug}`}
+        name={service.seoTitle}
+        description={service.seoDescription}
+        breadcrumbs={breadcrumbs}
+        service={service}
+      />
       <section className="service-hero">
         <div className="service-hero-copy">
-          <Link className="back-link" href="/services">
-            ← ALL SERVICES
-          </Link>
+          <Breadcrumbs items={breadcrumbs} />
           <p className="section-label">
             {service.number} — {service.title}
           </p>
           <h1>{service.headline}</h1>
           <p>{service.intro}</p>
+          <p className="service-area">
+            Online design for homes in Florida and nationwide.
+          </p>
           <Link
             className="outline-button"
             href={`/contact?service=${service.slug}`}
@@ -113,6 +114,30 @@ export default async function ServicePage({
             </li>
           ))}
         </ol>
+      </section>
+      <section
+        className="service-questions section-container"
+        aria-labelledby="questions-title"
+      >
+        <div>
+          <p className="section-label">A FEW USEFUL DETAILS</p>
+          <h2 id="questions-title">Before you choose.</h2>
+        </div>
+        <dl>
+          {service.questions.map((question) => (
+            <div key={question.question}>
+              <dt>{question.question}</dt>
+              <dd>
+                <p>{question.answer}</p>
+                {'related' in question && (
+                  <Link className="text-link" href={question.related.path}>
+                    {question.related.label} <span aria-hidden="true">→</span>
+                  </Link>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
       <section className="preparation section-container">
         <div>

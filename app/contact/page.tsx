@@ -1,18 +1,33 @@
 import { studioPageMetadata } from '@/lib/metadata';
 import { Suspense } from 'react';
 import { InquiryForm } from '@/components/inquiry-form';
-export async function generateMetadata() {
-  return studioPageMetadata(
-    'Begin Your Project',
-    'Tell Aloria about your space. Begin your online interior design project with a thoughtful, personal approach.',
-    '/contact',
-  );
+import { Breadcrumbs } from '@/components/breadcrumbs';
+import { PageStructuredData } from '@/components/structured-data';
+
+const title = 'Contact Aloria | Begin Your Interior Design Project';
+const description =
+  'Tell Aloria about your room, style, and budget. Start an online interior design project with our Florida-based studio, serving clients nationwide.';
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Contact', path: '/contact' },
+];
+
+export function generateMetadata() {
+  return studioPageMetadata(title, description, '/contact');
 }
 
 export default function ContactPage() {
   return (
     <main id="main-content" className="contact-page section-container">
+      <PageStructuredData
+        path="/contact"
+        name={title}
+        description={description}
+        type="ContactPage"
+        breadcrumbs={breadcrumbs}
+      />
       <div className="contact-intro">
+        <Breadcrumbs items={breadcrumbs} />
         <p className="section-label">CONTACT ALORIA</p>
         <h1>
           Let’s begin

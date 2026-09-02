@@ -1,43 +1,57 @@
-import { headers } from 'next/headers';
-import { assetPath, siteHref } from '@/lib/site-path';
+import type { Metadata } from 'next';
+import site from '@/lib/site-config.json';
 
-export async function requestOrigin() {
-  // Static exports have no incoming request from which to read a Host header.
-  if (process.env.NEXT_PUBLIC_SITE_ORIGIN)
-    return new URL(process.env.NEXT_PUBLIC_SITE_ORIGIN);
-  // Sites routes the direct Host header to this site. Do not use forwarded-host headers.
-  const host = (await headers()).get('host');
-  if (!host || !/^[a-z0-9.-]+(?::[0-9]+)?$/i.test(host))
-    throw new Error('Invalid site origin');
-  const local = /^(localhost|127\.0\.0\.1)(:[0-9]+)?$/.test(host);
-  return new URL(`${local ? 'http' : 'https'}://${host}`);
+export { site };
+
+// Keep one preferred domain across Pages, the Sites backend, and query variants.
+export function canonicalUrl(path: string) {
+  const url = new URL(path, site.origin);
+  url.search = '';
+  url.hash = '';
+  url.pathname = `${url.pathname.replace(/\/+$/, '')}/`;
+  return url.toString();
 }
 
-export async function studioPageMetadata(
+type SharingImage = {
+  path: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
+export function studioPageMetadata(
   title: string,
   description: string,
   path: string,
-): Promise<import('next').Metadata> {
-  const origin = await requestOrigin();
-  const fullTitle = title.includes('Aloria') ? title : `${title} | Aloria`;
-  const image = new URL(assetPath('/og.png'), origin).toString();
-  const canonical = new URL(siteHref(path), origin).toString();
+  sharingImage: SharingImage = {
+    path: '/og.png',
+    width: 1536,
+    height: 1024,
+    alt: 'Aloria — Timeless interiors inspired by European elegance.',
+  },
+): Metadata {
+  const fullTitle = title.includes(site.name)
+    ? title
+    : `${title} | ${site.name}`;
+  const image = new URL(sharingImage.path, site.origin).toString();
+  const canonical = canonicalUrl(path);
   return {
     title: { absolute: fullTitle },
     description,
     alternates: { canonical },
     openGraph: {
       type: 'website',
-      siteName: 'Aloria',
+      siteName: site.name,
+      locale: 'en_US',
       title: fullTitle,
       description,
       url: canonical,
       images: [
         {
           url: image,
-          width: 1536,
-          height: 1024,
-          alt: 'Aloria — Timeless interiors inspired by European elegance.',
+          width: sharingImage.width,
+          height: sharingImage.height,
+          alt: sharingImage.alt,
         },
       ],
     },

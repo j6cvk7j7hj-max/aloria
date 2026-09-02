@@ -15,7 +15,7 @@ The preview runs at http://localhost:3000. `pnpm build` produces the Cloudflare 
 
 ## GitHub Pages
 
-The production domain is [Aloria](https://aloriadesign.com/), hosted on GitHub Pages. Its DNS must point to GitHub Pages before the custom address will serve the website.
+The production domain is [Aloria](https://aloriadesign.com/), hosted on GitHub Pages with HTTPS enabled.
 
 The `Deploy Aloria to GitHub Pages` workflow builds and publishes the website on every push to `main`. Pages must use **GitHub Actions** as its publishing source. Publishing the repository root directly displays this README instead of the website.
 
@@ -45,7 +45,15 @@ Self-hosted Cormorant Garamond, warm ivory and brown, square buttons, original b
 
 ## Remaining studio details
 
-Add Mia’s real studio email, Instagram, and Pinterest links once supplied. Pricing and a measurement guide can be added when ready. The website is public at https://aloria-interiors.glossy-bison-4514.chatgpt.site. A custom domain can be connected separately.
+Add Mia’s real studio email, Instagram, and Pinterest links once supplied. Pricing and a measurement guide can be added when ready. The public Sites deployment remains available at https://aloria-interiors.glossy-bison-4514.chatgpt.site and runs the inquiry backend; its page canonicals identify the primary custom domain.
+
+## Search visibility
+
+See [SEO.md](SEO.md) for the researched search strategy, page targets, current Google guidance, and the remaining Search Console ownership setup. The site describes Aloria as a Florida-based online studio serving clients nationwide. Exact city and in-person service details still need confirmation before city-specific targeting or a Google Business Profile.
+
+`lib/site-config.json` defines the primary origin and page inventory. Search metadata is shared through `lib/metadata.ts`; service search copy lives in `lib/services.ts`. Structured data is server-rendered. Static `app/robots.txt` and `app/sitemap.xml` are emitted by vinext for both hosting environments.
+
+`pnpm build:pages` includes the SEO checks in `scripts/check-seo.mjs`, so CI rejects missing metadata, mismatched sitemap URLs, unlinked pages, and broken SEO assets before deployment. `pnpm check:seo` reruns the checks on `dist/client` after a Pages build. When adding pages, update the route inventory and sitemap together. Use real modification dates if adding `lastmod` values; do not stamp the current date on every build.
 
 ## Navigation
 

@@ -7,8 +7,9 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { join } from 'node:path';
+import site from '../lib/site-config.json' with { type: 'json' };
 
-const origin = 'https://aloriadesign.com';
+const origin = site.origin;
 const basePath = '';
 const result = spawnSync('vinext', ['build'], {
   stdio: 'inherit',
@@ -25,16 +26,7 @@ const result = spawnSync('vinext', ['build'], {
 if (result.error) throw result.error;
 if (result.status !== 0) process.exit(result.status || 1);
 
-const routes = [
-  '',
-  'about',
-  'contact',
-  'services',
-  'services/space-planning',
-  'services/concept-board',
-  'services/furniture-curation',
-  'services/signature-design',
-];
+const routes = site.routes.map((path) => path.slice(1, -1));
 
 // vinext's prerenderer does not follow trailing-slash redirects. Export with
 // its default routing, then arrange HTML as directory indexes for Pages.
@@ -74,6 +66,7 @@ for (const route of routes) {
   }
 }
 writeFileSync('dist/client/.nojekyll', '');
+await import('./check-seo.mjs');
 console.log(
   `GitHub Pages export ready: ${routes.length} pages in dist/client.`,
 );
