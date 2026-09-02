@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { flushSync } from 'react-dom';
 import { useSearchParams } from 'next/navigation';
 import { SiteLink as Link } from '@/components/site-link';
@@ -35,9 +35,21 @@ type ModelContext = {
 };
 const stageSchema = inquirySchema.partial().strict();
 
+function subscribeToLocation(onChange: () => void) {
+  window.addEventListener('popstate', onChange);
+  return () => window.removeEventListener('popstate', onChange);
+}
+
+function browserSearch() {
+  return window.location.search;
+}
+
 export function InquiryForm() {
   const params = useSearchParams();
-  const selected = params.get('service');
+  const search = useSyncExternalStore(subscribeToLocation, browserSearch, () =>
+    params.toString(),
+  );
+  const selected = new URLSearchParams(search).get('service');
   const [values, setValues] = useState<Inquiry>(emptyInquiry);
   const [serviceChosen, setServiceChosen] = useState(false);
   // Static HTML has no query. Follow the hydrated query until the visitor
