@@ -1,0 +1,27 @@
+# Local system files
+.DS_Store
+Thumbs.db
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+.next/
+out/
+.cache/
+coverage/
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs
+*.log
+
+# Local tooling and editor files
+.tools/
+.idea/
+.vscode/
