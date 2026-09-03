@@ -274,7 +274,8 @@ export function InquiryForm() {
         <h2>Your project begins here.</h2>
         <p>
           Your inquiry and any photos have been received. Thank you for sharing
-          your vision with Aloria.
+          your vision with Aloria. Mia will review your details and reply to the
+          email address you provided.
         </p>
         <Link className="text-link" href="/services">
           EXPLORE OUR SERVICES <span aria-hidden="true">→</span>
@@ -466,7 +467,8 @@ export function InquiryForm() {
         </div>
         <p className="form-privacy">
           Your details and photos are shared privately with Aloria to understand
-          and respond to your project inquiry.
+          and respond to your project inquiry. Your project is handled online;
+          in-person meetings and on-site work are not currently offered.
         </p>
       </fieldset>
       <Button

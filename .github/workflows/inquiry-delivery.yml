@@ -1,0 +1,27 @@
+name: Retry Aloria inquiry emails
+
+on:
+  schedule:
+    - cron: '3-58/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: inquiry-email-delivery
+  cancel-in-progress: false
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deliver queued inquiry emails
+        env:
+          DELIVERY_TOKEN: ${{ secrets.ALORIA_DELIVERY_TOKEN }}
+        run: |
+          test -n "$DELIVERY_TOKEN"
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Authorization: Bearer $DELIVERY_TOKEN" \
+            https://aloria-interiors.glossy-bison-4514.chatgpt.site/api/owner/delivery

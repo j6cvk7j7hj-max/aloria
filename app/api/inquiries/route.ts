@@ -1,6 +1,8 @@
 import { z } from 'zod';
+import { after } from 'next/server';
 import { getDatabase, getPhotoStorage } from '@/db';
 import { inquirySchema, photoLimits, photoTypes } from '@/lib/inquiry';
+import { drainInquiryEmails } from '@/lib/server/inquiry-delivery';
 
 const websiteOrigins = new Set([
   'https://aloriadesign.com',
@@ -71,6 +73,7 @@ export async function POST(request: Request) {
       413,
     );
   const uploaded: string[] = [];
+  let committed = false;
   try {
     // Bound the streamed body too, since Content-Length is not always supplied.
     const reader = request.body?.getReader();
@@ -160,28 +163,45 @@ export async function POST(request: Request) {
       });
     }
     const details = parsed.data;
-    const result = await db
-      .prepare(
-        'INSERT OR IGNORE INTO inquiries (id, created_at, name, email, service, details, photos) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      )
-      .bind(
-        id.data,
-        Date.now(),
-        details.name,
-        details.email,
-        details.service,
-        JSON.stringify(details),
-        JSON.stringify(storedPhotos),
-      )
-      .run();
+    const createdAt = Date.now();
+    const [result] = await db.batch([
+      db
+        .prepare(
+          'INSERT OR IGNORE INTO inquiries (id, created_at, name, email, service, details, photos) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        )
+        .bind(
+          id.data,
+          createdAt,
+          details.name,
+          details.email,
+          details.service,
+          JSON.stringify(details),
+          JSON.stringify(storedPhotos),
+        ),
+      db
+        .prepare(
+          `INSERT OR IGNORE INTO inquiry_deliveries
+           (inquiry_id, created_at, desktop_enabled, email_status,
+            email_attempts, email_next_attempt_at, email_lease_until)
+           VALUES (?, ?, 1, 'pending', 0, 0, 0)`,
+        )
+        .bind(id.data, createdAt),
+    ]);
+    committed = Boolean(result.meta.changes);
     if (!result.meta.changes && uploaded.length)
       await getPhotoStorage().delete(uploaded);
+    if (committed)
+      try {
+        after(() => drainInquiryEmails({ onlyId: id.data, limit: 1 }));
+      } catch {
+        // The saved inquiry remains queued for the scheduled delivery worker.
+      }
     return json(
       { id: id.data, received: true },
       result.meta.changes ? 201 : 200,
     );
   } catch (error) {
-    if (uploaded.length)
+    if (!committed && uploaded.length)
       await getPhotoStorage()
         .delete(uploaded)
         .catch(() => undefined);

@@ -29,7 +29,7 @@ Home, Services, About Aloria, Contact, and individual pages for Space Planning, 
 
 ## Project inquiries
 
-`POST /api/inquiries` validates and stores inquiries in D1 (`DB`) and optional photos in private R2 (`FILES`). The form supports four images, 5 MB each and 15 MB total. Retries are idempotent. There is no public endpoint to list inquiries or retrieve photos.
+`POST /api/inquiries` validates and stores inquiries in D1 (`DB`) and optional photos in private R2 (`FILES`). The form supports four images, 5 MB each and 15 MB total. Retries are idempotent. A private delivery queue sends owner notifications through Resend when that service is connected. An authenticated, owner-only feed lets the Mac sync each inquiry and its private photos to `~/Desktop/Aloria Inquiries`.
 
 For local storage, after the first build apply the generated schema:
 
@@ -37,7 +37,7 @@ For local storage, after the first build apply the generated schema:
 pnpm exec wrangler d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_nice_husk.sql
 ```
 
-Sites applies the packaged Drizzle migrations when publishing. Local test data is not deployed. The site owner can inspect inquiry rows using the Sites database tools; photo object references are stored with each inquiry. Email notifications and an inbox UI are not configured.
+Sites applies the packaged Drizzle migrations when publishing. Local test data is not deployed. Inquiry storage succeeds independently of notification delivery, so an email outage never discards a saved inquiry. A scheduled GitHub Actions workflow retries pending notifications every five minutes. See [INQUIRIES.md](INQUIRIES.md) for the complete data flow, private endpoint, Desktop agent, and email setup.
 
 ## Brand and motion
 
@@ -45,11 +45,11 @@ Self-hosted Cormorant Garamond, warm ivory and brown, square buttons, original b
 
 ## Remaining studio details
 
-Add Mia’s real studio email, Instagram, and Pinterest links once supplied. Pricing and a measurement guide can be added when ready. The public Sites deployment remains available at https://aloria-interiors.glossy-bison-4514.chatgpt.site and runs the inquiry backend; its page canonicals identify the primary custom domain.
+Add Aloria’s Instagram and Pinterest links once supplied. Pricing and a measurement guide can be added when ready. The public Sites deployment remains available at https://aloria-interiors.glossy-bison-4514.chatgpt.site and runs the private inquiry backend; its page canonicals identify the primary custom domain.
 
 ## Search visibility
 
-See [SEO.md](SEO.md) for the researched search strategy, page targets, current Google guidance, and the remaining Search Console ownership setup. The site describes Aloria as a Florida-based online studio serving clients nationwide. Exact city and in-person service details still need confirmation before city-specific targeting or a Google Business Profile.
+See [SEO.md](SEO.md) for the researched search strategy, page targets, current Google guidance, and the remaining Search Console ownership setup. The site describes Aloria as an online studio based in Hollywood, Florida. Services are currently delivered entirely online across Florida and nationwide; Aloria is not currently eligible for a Google Business Profile.
 
 `lib/site-config.json` defines the primary origin and page inventory. Search metadata is shared through `lib/metadata.ts`; service search copy lives in `lib/services.ts`. Structured data is server-rendered. Static `app/robots.txt` and `app/sitemap.xml` are emitted by vinext for both hosting environments.
 

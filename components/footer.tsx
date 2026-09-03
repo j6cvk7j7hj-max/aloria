@@ -29,9 +29,9 @@ export function Footer() {
         </nav>
         <div className="footer-location">
           <p>
-            Based in Florida
+            Based in Hollywood, Florida
             <br />
-            Online design, serving nationwide
+            Services delivered entirely online
           </p>
           <Link className="text-link" href="/contact">
             GET IN TOUCH <span aria-hidden="true">→</span>

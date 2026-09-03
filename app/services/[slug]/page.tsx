@@ -63,7 +63,8 @@ export default async function ServicePage({
           <h1>{service.headline}</h1>
           <p>{service.intro}</p>
           <p className="service-area">
-            Online design for homes in Florida and nationwide.
+            Delivered entirely online from Hollywood, Florida, for homes in
+            Florida and nationwide.
           </p>
           <Link
             className="outline-button"
