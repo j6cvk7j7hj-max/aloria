@@ -120,6 +120,7 @@ async function sendEmail(payload: FrozenEmail, inquiryId: string) {
       'User-Agent': 'Aloria-Inquiry-Delivery/1.0',
     },
     body: JSON.stringify(payload),
+    signal: AbortSignal.timeout(60_000),
   });
   const responseBody = (await response.json().catch(() => ({}))) as {
     id?: string;
@@ -150,16 +151,18 @@ export async function drainInquiryEmails(
       i.id, i.created_at, i.name, i.email, i.service, i.details, i.photos
      FROM inquiry_deliveries d
      JOIN inquiries i ON i.id = d.inquiry_id
-     WHERE d.email_status IN ('pending', 'retry')
-       AND d.email_next_attempt_at <= ?
+     WHERE (
+       (d.email_status IN ('pending', 'retry') AND d.email_next_attempt_at <= ?)
+       OR (d.email_status = 'sending' AND d.email_lease_until <= ?)
+     )
        AND d.email_lease_until <= ?
        ${onlyClause}
      ORDER BY d.sequence ASC
      LIMIT ?`,
   );
   const bound = options.onlyId
-    ? statement.bind(now, now, options.onlyId, limit)
-    : statement.bind(now, now, limit);
+    ? statement.bind(now, now, now, options.onlyId, limit)
+    : statement.bind(now, now, now, limit);
   const candidates = await bound.all<DeliveryRow>();
   let delivered = 0;
   let deferred = 0;
@@ -170,24 +173,38 @@ export async function drainInquiryEmails(
         `UPDATE inquiry_deliveries
          SET email_status = 'sending', email_lease_until = ?
          WHERE inquiry_id = ?
-           AND email_status IN ('pending', 'retry')
+           AND (
+             (email_status IN ('pending', 'retry') AND email_next_attempt_at <= ?)
+             OR (email_status = 'sending' AND email_lease_until <= ?)
+           )
            AND email_lease_until <= ?`,
       )
-      .bind(leaseUntil, row.inquiry_id, Date.now())
+      .bind(
+        leaseUntil,
+        row.inquiry_id,
+        Date.now(),
+        Date.now(),
+        Date.now(),
+      )
       .run();
     if (!claim.meta.changes) continue;
     const inquiry = storedInquiryFromRow(row);
-    const payload = row.email_payload
-      ? (JSON.parse(row.email_payload) as FrozenEmail)
-      : buildEmail(inquiry);
-    if (!row.email_payload)
-      await db
-        .prepare(
-          'UPDATE inquiry_deliveries SET email_payload = ? WHERE inquiry_id = ?',
-        )
-        .bind(JSON.stringify(payload), row.inquiry_id)
-        .run();
     try {
+      let payload: FrozenEmail;
+      try {
+        payload = row.email_payload
+          ? (JSON.parse(row.email_payload) as FrozenEmail)
+          : buildEmail(inquiry);
+      } catch {
+        payload = buildEmail(inquiry);
+      }
+      if (!row.email_payload)
+        await db
+          .prepare(
+            'UPDATE inquiry_deliveries SET email_payload = ? WHERE inquiry_id = ?',
+          )
+          .bind(JSON.stringify(payload), row.inquiry_id)
+          .run();
       const providerId = await sendEmail(payload, row.inquiry_id);
       await db
         .prepare(
