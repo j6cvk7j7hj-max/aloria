@@ -16,7 +16,7 @@ Aloria is based in Hollywood, Florida. The site clearly states that every consul
 
 - **Authoritative copy:** Cloudflare D1 through Sites stores every form answer and the delivery state. R2 stores original photographs privately.
 - **Mia’s email:** Resend sends a plain-text summary to `mia@aloriadesign.com`. Reply-To is the client’s validated address, so replying reaches the client directly. The message identifies the inquiry and lists photograph names; the originals remain private and copy to the Mac rather than becoming public email links.
-- **Mia’s Desktop:** a macOS LaunchAgent checks the authenticated owner feed every five minutes. It writes one named folder per inquiry under `~/Desktop/Aloria Inquiries`, containing a readable text file, complete JSON record, and `Photos` folder when applicable.
+- **Mia’s Desktop:** a macOS LaunchAgent checks the authenticated owner feed every minute. It writes one named folder per inquiry under `~/Desktop/Aloria Inquiries`, containing a readable text file, complete JSON record, and `Photos` folder when applicable.
 
 A folder name follows this pattern:
 

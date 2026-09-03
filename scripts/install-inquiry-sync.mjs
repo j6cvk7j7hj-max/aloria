@@ -89,7 +89,7 @@ const plist = `<?xml version="1.0" encoding="UTF-8"?>
   <key>RunAtLoad</key>
   <true/>
   <key>StartInterval</key>
-  <integer>300</integer>
+  <integer>60</integer>
   <key>ProcessType</key>
   <string>Background</string>
   <key>Umask</key>
