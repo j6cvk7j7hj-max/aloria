@@ -102,7 +102,7 @@ function readableRecord(inquiry) {
     ['Elements that must remain', inquiry.details?.keep],
     ['Inquiry ID', inquiry.id],
     [
-      'Email delivery',
+      'Email status when copied',
       inquiry.emailStatus === 'sent' ? 'Sent to Mia' : inquiry.emailStatus,
     ],
   ];
