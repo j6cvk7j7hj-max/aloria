@@ -2,7 +2,7 @@
 
 Primary website: [aloriadesign.com](https://aloriadesign.com/). Research reviewed September 3, 2026.
 
-Aloria’s current positioning is **an online interior design studio based in Hollywood, Florida, serving clients across Florida and nationwide**. Consultations and design work are currently entirely online. Aloria does not yet offer in-person meetings or on-site project work, and the website does not publish a street address or phone number.
+Aloria’s current positioning is **a Florida-based online interior design studio serving clients across Florida and nationwide**. Consultations and design work are currently entirely online. Aloria does not yet offer in-person meetings or on-site project work, and the website does not publish a street address or phone number.
 
 ## Implemented in the website
 
@@ -22,20 +22,20 @@ These targets reflect Aloria’s actual services. They are starting hypotheses, 
 
 | Page               | Main search intent                                                        |
 | ------------------ | ------------------------------------------------------------------------- |
-| Home               | Hollywood FL online interior design; European-inspired interiors          |
+| Home               | Florida online interior design; European-inspired interiors               |
 | Services           | Online interior design services; choosing the right design support        |
 | Space Planning     | Online space planning; furniture layouts; room layout help                |
 | Concept Board      | Interior design concept boards; mood boards; color and material direction |
 | Furniture Curation | Online furniture curation; furniture and décor sourcing                   |
 | Signature Design   | Complete online room design; coordinated room design plan                 |
-| About              | Aloria; Mia; Hollywood Florida online interior design studio              |
+| About              | Aloria; Mia; Florida-based online interior design studio                  |
 | Contact            | Contact Aloria; start an online interior design project                   |
 
 ## What current research changes
 
-**The site is live, but search visibility is not established yet.** Public web searches reviewed on September 3, 2026 did not surface `aloriadesign.com` for `Aloria`, `Alloria`, `"Aloria" "Hollywood"`, the exact domain, or a `site:aloriadesign.com` query. This is a limited observation rather than proof of Google’s indexing status or a measured ranking. Verify the actual status with Search Console URL Inspection. Google also notes that a missing result from the `site:` operator does not by itself prove a technical problem. [Google’s site-operator guidance](https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site)
+**The site is live, but search visibility is not established yet.** Public web searches reviewed on September 3, 2026 did not surface `aloriadesign.com` for `Aloria`, `Alloria`, the exact domain, or a `site:aloriadesign.com` query. This is a limited observation rather than proof of Google’s indexing status or a measured ranking. Verify the actual status with Search Console URL Inspection. Google also notes that a missing result from the `site:` operator does not by itself prove a technical problem. [Google’s site-operator guidance](https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site)
 
-**A search result is generated for the query.** When the site is indexed, Google may use the page title and description as inputs but can rewrite both. An illustrative result for a relevant search could read “Online Interior Design in Hollywood, FL | Aloria” with a description of the four online services. It is an example, not a claim about the result Google currently shows. [Title-link guidance](https://developers.google.com/search/docs/appearance/title-link), [Snippet guidance](https://developers.google.com/search/docs/appearance/snippet)
+**A search result is generated for the query.** When the site is indexed, Google may use the page title and description as inputs but can rewrite both. An illustrative result for a relevant search could read “Online Interior Design in Florida | Aloria” with a description of the four online services. It is an example, not a claim about the result Google currently shows. [Title-link guidance](https://developers.google.com/search/docs/appearance/title-link), [Snippet guidance](https://developers.google.com/search/docs/appearance/snippet)
 
 **The name needs time and consistency.** Searches for `Aloria` and the misspelling `Alloria` currently show unrelated brands. Use the correct spelling Aloria consistently on the website, business profiles, and real social accounts. Do not add repeated misspellings or keyword-stuffed copy. A person who already has the URL can reach the site directly while search engines discover and evaluate it.
 
@@ -45,7 +45,7 @@ These targets reflect Aloria’s actual services. They are starting hypotheses, 
 
 **Questions should help visitors choose.** Google ended FAQ rich results starting May 7, 2026. Aloria’s questions are normal, readable page content; they do not use FAQ markup or promise expanded search listings. [Google documentation updates](https://developers.google.com/search/updates)
 
-**Local visibility needs accurate business details.** Aloria is based in Hollywood but is currently online-only, so it is not eligible for a Google Business Profile or Maps business listing. If Aloria later begins meeting clients or visiting project sites, confirm the real in-person service area before setting up a profile. A qualifying business that visits clients may use a service-area profile and hide a residential address. [Business Profile eligibility](https://support.google.com/business/answer/7039811), [Business representation guidelines](https://support.google.com/business/answer/3038177)
+**Local visibility needs accurate business details.** Aloria is Florida-based but is currently online-only, so it is not eligible for a Google Business Profile or Maps business listing. If Aloria later begins meeting clients or visiting project sites, confirm the real in-person service area before setting up a profile. A qualifying business that visits clients may use a service-area profile and hide a residential address. [Business Profile eligibility](https://support.google.com/business/answer/7039811), [Business representation guidelines](https://support.google.com/business/answer/3038177)
 
 **Specific pages need a genuine purpose.** Avoid copying the same content into dozens of Florida city pages. Publish a city page only when there is distinctive, accurate local information and a useful service explanation. Google identifies regional doorway pages and keyword stuffing as spam patterns. [Google spam policies](https://developers.google.com/search/docs/essentials/spam-policies)
 
@@ -66,7 +66,7 @@ Verification requires the real value from the owner’s Google account; there is
 
 ## Next local inputs and ongoing work
 
-Add any public social accounts and contact details Mia wants displayed once they are ready. Keep the Hollywood base and online-only wording accurate. If in-person services begin later, update the service-area copy and evaluate Business Profile eligibility at that time. Google describes local ranking in terms of relevance, distance, and prominence; a statewide service statement alone cannot establish proximity to every Florida searcher. [Local ranking guidance](https://support.google.com/business/answer/7091)
+Add any public social accounts and contact details Mia wants displayed once they are ready. Keep the Florida-based and online-only wording accurate. If in-person services begin later, update the service-area copy and evaluate Business Profile eligibility at that time. Google describes local ranking in terms of relevance, distance, and prominence; a statewide service statement alone cannot establish proximity to every Florida searcher. [Local ranking guidance](https://support.google.com/business/answer/7091)
 
 As real work becomes available, publish approved project stories that explain the room, constraints, layout choices, materials, and result. Label independent design concepts clearly. Keep business listings and genuine social profiles consistent, and request honest reviews from actual clients if the business qualifies for a profile.
 

@@ -29,7 +29,7 @@ export function Footer() {
         </nav>
         <div className="footer-location">
           <p>
-            Based in Hollywood, Florida
+            Florida-based design studio
             <br />
             Services delivered entirely online
           </p>

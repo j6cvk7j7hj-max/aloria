@@ -10,7 +10,7 @@ export function ServiceCards() {
       {services.map((service, index) => (
         <Reveal
           key={service.slug}
-          delay={index * 60}
+          delay={index * 140}
           className="service-card-reveal"
         >
           <article className="service-card">
@@ -22,6 +22,8 @@ export function ServiceCards() {
             >
               <img
                 src={assetPath(`/images/${service.slug}.avif`)}
+                srcSet={`${assetPath(`/images/${service.slug}.avif`)} 586w, ${assetPath(`/images/${service.slug}-large.avif`)} 1172w`}
+                sizes="(max-width: 767px) 90vw, (max-width: 1100px) 44vw, 22vw"
                 alt=""
                 width="586"
                 height="436"

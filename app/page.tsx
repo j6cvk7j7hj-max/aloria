@@ -7,7 +7,7 @@ import { Reveal } from '@/components/reveal';
 import { PageStructuredData } from '@/components/structured-data';
 import { site, studioPageMetadata } from '@/lib/metadata';
 
-const title = 'Online Interior Design in Hollywood, FL';
+const title = 'Online Interior Design in Florida';
 
 export function generateMetadata() {
   return studioPageMetadata(title, site.description, '/');
@@ -105,13 +105,13 @@ export default function Home() {
           <p className="section-label">ABOUT ALORIA</p>
           <h2 id="about-title">Timeless interiors, designed with intention.</h2>
           <p>
-            Aloria is an online interior design studio based in Hollywood,
-            Florida, serving clients across Florida and nationwide with a
-            timeless, European-inspired approach. Every service is currently
-            delivered entirely online, making it possible to collaborate
-            thoughtfully through measurements, photos, video, and digital design
-            plans. Whether redesigning a single room or starting fresh, our goal
-            is to help clients create homes they will love for years to come.
+            Aloria is a Florida-based online interior design studio serving
+            clients across the state and nationwide with a timeless,
+            European-inspired approach. Every service is currently delivered
+            entirely online, making it possible to collaborate thoughtfully
+            through measurements, photos, video, and digital design plans.
+            Whether redesigning a single room or starting fresh, our goal is to
+            help clients create homes they will love for years to come.
           </p>
           <Link className="outline-button" href="/about">
             LEARN MORE <span aria-hidden="true">→</span>

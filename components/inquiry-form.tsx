@@ -313,7 +313,7 @@ export function InquiryForm() {
             type: 'email',
             autoComplete: 'email',
           })}
-          {input('location', 'Location', {
+          {input('location', 'Project location', {
             required: true,
             placeholder: 'City, state / country',
             autoComplete: 'address-level2',
@@ -467,8 +467,9 @@ export function InquiryForm() {
         </div>
         <p className="form-privacy">
           Your details and photos are shared privately with Aloria to understand
-          and respond to your project inquiry. Your project is handled online;
-          in-person meetings and on-site work are not currently offered.
+          and respond to your project inquiry. Payment information is never
+          collected through this form. Your project is handled online; in-person
+          meetings and on-site work are not currently offered.
         </p>
       </fieldset>
       <Button

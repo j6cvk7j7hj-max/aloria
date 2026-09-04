@@ -63,8 +63,8 @@ export default async function ServicePage({
           <h1>{service.headline}</h1>
           <p>{service.intro}</p>
           <p className="service-area">
-            Delivered entirely online from Hollywood, Florida, for homes in
-            Florida and nationwide.
+            Delivered entirely online by a Florida-based studio for homes across
+            the state and nationwide.
           </p>
           <Link
             className="outline-button"
@@ -76,6 +76,8 @@ export default async function ServicePage({
         <div className="service-hero-image">
           <img
             src={assetPath(`/images/${service.slug}.avif`)}
+            srcSet={`${assetPath(`/images/${service.slug}.avif`)} 586w, ${assetPath(`/images/${service.slug}-large.avif`)} 1172w`}
+            sizes="(max-width: 767px) 100vw, 52vw"
             alt={service.alt}
             width="586"
             height="436"

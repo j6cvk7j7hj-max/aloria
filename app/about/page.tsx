@@ -6,9 +6,9 @@ import { Reveal } from '@/components/reveal';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { PageStructuredData } from '@/components/structured-data';
 
-const title = 'About Aloria | Hollywood, FL Online Interior Design';
+const title = 'About Aloria | Florida Online Interior Design';
 const description =
-  'Meet Mia, founder of Aloria, an online interior design studio based in Hollywood, Florida, creating European-inspired rooms for clients in Florida and nationwide.';
+  'Meet Mia, founder of Aloria, a Florida-based online interior design studio creating European-inspired rooms for clients across the state and nationwide.';
 const breadcrumbs = [
   { name: 'Home', path: '/' },
   { name: 'About Aloria', path: '/about' },
@@ -52,14 +52,14 @@ export default function AboutPage() {
         </Reveal>
         <div>
           <p>
-            Hi, I’m Mia, founder of Aloria, an online interior design studio
-            based in Hollywood, Florida and serving clients across Florida and
-            nationwide. My approach to interior design is rooted in a love of
-            timeless architecture, thoughtful space planning, warm natural
-            materials, and interiors that feel refined without sacrificing
-            comfort. I created Aloria to offer approachable online design
-            services that help clients make confident decisions and create homes
-            that feel considered, personal, and lasting.
+            Hi, I’m Mia, founder of Aloria, a Florida-based online interior
+            design studio serving clients across the state and nationwide. My
+            approach to interior design is rooted in a love of timeless
+            architecture, thoughtful space planning, warm natural materials, and
+            interiors that feel refined without sacrificing comfort. I created
+            Aloria to offer approachable online design services that help
+            clients make confident decisions and create homes that feel
+            considered, personal, and lasting.
           </p>
           <p>
             Beautiful interiors should feel personal, functional, and enduring
@@ -74,8 +74,7 @@ export default function AboutPage() {
           <p>
             For now, every consultation and design service takes place online;
             Aloria does not schedule in-person meetings or on-site project work.
-            As the studio grows, selected local, in-person projects may become
-            available in the future.
+            In-person offerings may be introduced as the studio grows.
           </p>
           <span className="founder-signature">Mia</span>
         </div>

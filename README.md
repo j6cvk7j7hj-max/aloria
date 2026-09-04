@@ -49,7 +49,7 @@ Add Aloria’s Instagram and Pinterest links once supplied. Pricing and a measur
 
 ## Search visibility
 
-See [SEO.md](SEO.md) for the researched search strategy, page targets, current Google guidance, and the remaining Search Console ownership setup. The site describes Aloria as an online studio based in Hollywood, Florida. Services are currently delivered entirely online across Florida and nationwide; Aloria is not currently eligible for a Google Business Profile.
+See [SEO.md](SEO.md) for the researched search strategy, page targets, current Google guidance, and the remaining Search Console ownership setup. The site describes Aloria as a Florida-based online studio. Services are currently delivered entirely online across Florida and nationwide; Aloria is not currently eligible for a Google Business Profile.
 
 `lib/site-config.json` defines the primary origin and page inventory. Search metadata is shared through `lib/metadata.ts`; service search copy lives in `lib/services.ts`. Structured data is server-rendered. Static `app/robots.txt` and `app/sitemap.xml` are emitted by vinext for both hosting environments.
 

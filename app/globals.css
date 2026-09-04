@@ -142,13 +142,18 @@ button:focus-visible {
 }
 .header-over-hero {
   position: absolute;
-  inset: 16px clamp(16px, 2vw, 32px) auto;
-  background: rgb(247 242 235 / 84%);
-  border: 1px solid rgb(107 86 68 / 18%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 8px 30px rgb(70 48 28 / 5%);
-  animation: header-entrance 800ms var(--ease-out) both;
+  inset: 0 0 auto;
+  color: #624d3c;
+  background: linear-gradient(
+    180deg,
+    rgb(247 242 235 / 64%),
+    rgb(247 242 235 / 48%)
+  );
+  border-color: rgb(107 86 68 / 15%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgb(70 48 28 / 3%);
+  animation: header-entrance 950ms var(--ease-out) both;
 }
 .wordmark {
   flex-shrink: 0;
@@ -224,6 +229,7 @@ button:focus-visible {
   width: 390px;
   margin-left: 6%;
   text-align: center;
+  transform: translateY(-44px);
 }
 .hero-copy h1 {
   font-size: clamp(72px, 6.25vw, 90px);
@@ -442,9 +448,9 @@ button:focus-visible {
     padding: 0 23px;
   }
   .header-over-hero {
-    inset: 12px 12px auto;
-    padding-inline: 18px;
-    height: 64px;
+    inset: 0 0 auto;
+    padding-inline: 23px;
+    height: 72px;
   }
   .wordmark {
     font-size: 32px;
@@ -476,6 +482,7 @@ button:focus-visible {
     max-width: 340px;
     padding: 28px 12px;
     background: rgb(247 242 235 / 52%);
+    transform: translateY(-18px);
   }
   .hero-copy h1 {
     font-size: 56px;
@@ -567,6 +574,8 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  transform: translateY(0) scale(1);
+  transition: transform 280ms var(--ease-out);
 }
 .service-image {
   overflow: hidden;
@@ -576,7 +585,7 @@ button:focus-visible {
 .service-image img {
   height: 100%;
   object-fit: cover;
-  transition: transform 400ms var(--ease-out);
+  transition: transform 280ms var(--ease-out);
 }
 .service-card-copy {
   flex: 1;
@@ -925,31 +934,24 @@ button:focus-visible {
   opacity: 1;
   transform: translateY(0);
   transition:
-    opacity 700ms var(--ease-out),
-    transform 700ms var(--ease-out);
+    opacity 1050ms var(--ease-out),
+    transform 1050ms var(--ease-out);
 }
 .reveal[data-reveal='waiting'] {
   opacity: 0;
   transform: translateY(15px);
 }
 .hero-copy > * {
-  animation: hero-entrance 850ms var(--ease-out) both;
+  animation: hero-entrance 1050ms var(--ease-out) both;
 }
 .hero-copy .hero-rule {
-  animation-delay: 60ms;
+  animation-delay: 110ms;
 }
 .hero-copy > p {
-  animation-delay: 120ms;
+  animation-delay: 220ms;
 }
 .hero-copy .hero-action {
-  animation-delay: 180ms;
-}
-.image-reveal img {
-  transform: scale(1);
-  transition: transform 1200ms var(--ease-out);
-}
-.image-reveal[data-reveal='waiting'] img {
-  transform: scale(1.035);
+  animation-delay: 330ms;
 }
 @keyframes header-entrance {
   from {
@@ -988,8 +990,11 @@ button:focus-visible {
   .solid-button:not(:disabled):active {
     transform: scale(0.98);
   }
+  .service-card-reveal:hover .service-card {
+    transform: translateY(-7px) scale(1.012);
+  }
   .service-card:hover .service-image img {
-    transform: scale(1.025);
+    transform: scale(1.018);
   }
   .footer-main nav a:hover,
   .breadcrumbs a:hover {
@@ -1188,6 +1193,7 @@ button:focus-visible {
   .solid-button span,
   .text-link span,
   .image-reveal img,
+  .service-card,
   .service-image img,
   .section-flourish,
   .featured-cta::after {
@@ -1222,6 +1228,42 @@ button:focus-visible {
 }
 .contact-location p {
   font-size: 20px;
+}
+.contact-next-steps {
+  grid-column: 1 / -1;
+  margin-top: 40px;
+  padding-top: clamp(75px, 8vw, 115px);
+  border-top: 1px solid var(--border);
+}
+.contact-next-steps h2 {
+  max-width: 650px;
+  font-size: clamp(44px, 4vw, 58px);
+  line-height: 1.12;
+}
+.contact-next-steps ol {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 5vw, 75px);
+  margin: 58px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.contact-next-steps li {
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.contact-next-steps li > span {
+  color: var(--taupe);
+  font-size: 18px;
+  letter-spacing: 0.07em;
+}
+.contact-next-steps h3 {
+  margin: 19px 0 14px;
+  font-size: 31px;
+  line-height: 1.15;
+}
+.contact-next-steps li p {
+  font-size: 21px;
 }
 .form-introduction {
   font-size: 32px;
@@ -1433,6 +1475,15 @@ button:focus-visible {
   }
   .contact-location p {
     font-size: 20px;
+  }
+  .contact-next-steps {
+    margin-top: 20px;
+    padding-top: 70px;
+  }
+  .contact-next-steps ol {
+    grid-template-columns: 1fr;
+    gap: 38px;
+    margin-top: 42px;
   }
   .form-grid {
     grid-template-columns: 1fr;

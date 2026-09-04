@@ -15,7 +15,6 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
 const organizationId = `${site.origin}/#organization`;
 const websiteId = `${site.origin}/#website`;
 const areaServed = [
-  { '@type': 'City', name: 'Hollywood, Florida' },
   { '@type': 'State', name: 'Florida' },
   { '@type': 'Country', name: 'United States' },
 ];
@@ -37,10 +36,7 @@ export function StudioStructuredData() {
               name: 'Mia',
               url: canonicalUrl('/about'),
             },
-            location: {
-              '@type': 'Place',
-              name: 'Hollywood, Florida',
-            },
+            location: { '@type': 'State', name: 'Florida' },
             areaServed,
           },
           {

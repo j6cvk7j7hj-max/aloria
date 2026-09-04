@@ -10,7 +10,7 @@ The public form saves each valid inquiry to Aloria’s private Sites database an
 4. Client and browser validation catches missing or invalid fields. The server separately validates the values, file types, file signatures, sizes, and allowed website origin.
 5. After the database row and private photo objects are saved, the page confirms receipt. Mia then reviews the inquiry and replies to the client’s supplied email address.
 
-Aloria is based in Hollywood, Florida. The site clearly states that every consultation and service is currently delivered online through measurements, photographs, video, and digital plans. No in-person meeting or on-site project work is offered yet. The About page explains that selected local in-person projects may become available as the studio grows.
+Aloria is a Florida-based online interior design studio. The site clearly states that every consultation and service is currently delivered online through measurements, photographs, video, and digital plans. No in-person meeting or on-site project work is offered yet. The About page explains that in-person offerings may be introduced as the studio grows.
 
 ## Where the information goes
 

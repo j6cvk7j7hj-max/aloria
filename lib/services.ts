@@ -5,7 +5,7 @@ export const services = [
     title: 'Space Planning',
     seoTitle: 'Online Space Planning & Furniture Layouts',
     seoDescription:
-      'Plan a room that flows with Aloria’s online space planning: a scaled furniture layout, thoughtful placement, and one revision. Based in Hollywood, Florida; available nationwide.',
+      'Plan a room that flows with Aloria’s online space planning: a scaled furniture layout, thoughtful placement, and one revision. Available across Florida and nationwide.',
     description:
       'A tailored furniture layout created to maximize flow, comfort, and function.',
     headline: 'A room that flows beautifully starts with the right layout.',
@@ -59,7 +59,7 @@ export const services = [
     title: 'Concept Board',
     seoTitle: 'Interior Design Concept & Mood Boards',
     seoDescription:
-      'Find your room’s direction with an Aloria interior design concept board: colors, textures, materials, and inspiration. Created online in Hollywood, Florida for homes nationwide.',
+      'Find your room’s direction with an Aloria interior design concept board of colors, textures, materials, and inspiration, created online across Florida and nationwide.',
     description:
       'A curated collection of colors, materials, and inspiration that brings your design vision together.',
     headline: 'A clear visual direction for your space.',
@@ -113,7 +113,7 @@ export const services = [
     title: 'Furniture Curation',
     seoTitle: 'Online Furniture Curation & Sourcing',
     seoDescription:
-      'Bring your room together with Aloria’s online furniture and décor curation, tailored to your style, dimensions, and budget. Based in Hollywood, Florida; available nationwide.',
+      'Bring your room together with Aloria’s online furniture and décor curation, tailored to your style, dimensions, and budget. Available across Florida and nationwide.',
     description:
       'Curated furniture and décor recommendations tailored to your style, space, and budget.',
     headline: 'The right pieces, thoughtfully selected.',
@@ -169,7 +169,7 @@ export const services = [
     title: 'Signature Design',
     seoTitle: 'Complete Online Room Design',
     seoDescription:
-      'Aloria’s Signature Design combines space planning, a concept board, furniture curation, and a shopping list. Complete online room design from Hollywood, Florida.',
+      'Aloria’s Signature Design combines space planning, a concept board, furniture curation, and a shopping list for clients across Florida and nationwide.',
     description:
       'A complete design experience, thoughtfully curated from first ideas to final selections.',
     headline:

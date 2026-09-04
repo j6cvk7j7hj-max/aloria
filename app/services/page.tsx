@@ -6,7 +6,7 @@ import { PageStructuredData } from '@/components/structured-data';
 
 const title = 'Online Interior Design Services';
 const description =
-  'Explore Aloria’s online interior design services from Hollywood, Florida: space planning, concept boards, furniture curation, and complete room design nationwide.';
+  'Explore Aloria’s Florida-based online interior design services: space planning, concept boards, furniture curation, and complete room design nationwide.';
 const breadcrumbs = [
   { name: 'Home', path: '/' },
   { name: 'Services', path: '/services' },
@@ -33,8 +33,8 @@ export default function ServicesPage() {
         <p>
           Choose the level of design support that fits your project, from space
           planning and concept development to curated furnishings and complete
-          room design. Every service is currently delivered online from our
-          Hollywood, Florida studio for homes across Florida and throughout the
+          room design. Every service is currently delivered online by our
+          Florida-based studio for homes across the state and throughout the
           United States.
         </p>
       </section>
