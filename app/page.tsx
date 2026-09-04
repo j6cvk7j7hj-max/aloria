@@ -41,9 +41,11 @@ export default function Home() {
               <br />
               European elegance.
             </p>
-            <Link className="outline-button" href="/contact">
-              BEGIN YOUR PROJECT
-            </Link>
+            <div className="hero-action">
+              <Link className="outline-button" href="/contact">
+                BEGIN YOUR PROJECT <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -51,7 +53,7 @@ export default function Home() {
         className="philosophy split-section"
         aria-labelledby="philosophy-title"
       >
-        <div className="split-copy">
+        <Reveal className="split-copy">
           <p className="section-label">OUR PHILOSOPHY</p>
           <h2 id="philosophy-title">
             Every beautiful home begins with thoughtful design.
@@ -65,8 +67,8 @@ export default function Home() {
           <Link className="text-link" href="/about">
             LEARN MORE <span aria-hidden="true">→</span>
           </Link>
-        </div>
-        <div className="split-image">
+        </Reveal>
+        <Reveal className="split-image image-reveal" delay={80}>
           <img
             src={assetPath('/images/philosophy.avif')}
             alt="Warm daylight and fresh flowers beside a classical marble fireplace"
@@ -74,7 +76,7 @@ export default function Home() {
             height="819"
             loading="lazy"
           />
-        </div>
+        </Reveal>
       </section>
       <section
         className="home-services section-container"
@@ -90,7 +92,7 @@ export default function Home() {
         className="split-section about-home"
         aria-labelledby="about-title"
       >
-        <div className="split-image">
+        <Reveal className="split-image image-reveal">
           <img
             src={assetPath('/images/about.avif')}
             alt="An elegant room with a marble fireplace, gold mirror, cream sofa, and soft natural light"
@@ -98,14 +100,10 @@ export default function Home() {
             height="1029"
             loading="lazy"
           />
-        </div>
-        <div className="split-copy">
-          <Reveal>
-            <p className="section-label">ABOUT ALORIA</p>
-            <h2 id="about-title">
-              Timeless interiors, designed with intention.
-            </h2>
-          </Reveal>
+        </Reveal>
+        <Reveal className="split-copy" delay={80}>
+          <p className="section-label">ABOUT ALORIA</p>
+          <h2 id="about-title">Timeless interiors, designed with intention.</h2>
           <p>
             Aloria is an online interior design studio based in Hollywood,
             Florida, serving clients across Florida and nationwide with a
@@ -118,7 +116,7 @@ export default function Home() {
           <Link className="outline-button" href="/about">
             LEARN MORE <span aria-hidden="true">→</span>
           </Link>
-        </div>
+        </Reveal>
       </section>
       <ProjectCta />
     </main>

@@ -46,6 +46,7 @@
   --ring: #6b5644;
   --destructive: #854d40;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --section-space: clamp(80px, 8vw, 130px);
 }
 * {
@@ -141,11 +142,16 @@ button:focus-visible {
 }
 .header-over-hero {
   position: absolute;
-  inset: 0 0 auto;
-  background: rgb(247 242 235 / 15%);
-  border-color: rgb(107 86 68 / 12%);
+  inset: 16px clamp(16px, 2vw, 32px) auto;
+  background: rgb(247 242 235 / 84%);
+  border: 1px solid rgb(107 86 68 / 18%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgb(70 48 28 / 5%);
+  animation: header-entrance 800ms var(--ease-out) both;
 }
 .wordmark {
+  flex-shrink: 0;
   font-size: 45px;
   line-height: 1;
   letter-spacing: 0.2em;
@@ -153,6 +159,9 @@ button:focus-visible {
 }
 .desktop-nav {
   display: flex;
+  flex: 0 0 auto;
+  margin-left: 28px;
+  white-space: nowrap;
   gap: clamp(25px, 3vw, 48px);
   align-items: center;
 }
@@ -161,7 +170,7 @@ button:focus-visible {
   font-size: 20px;
   line-height: 1.5;
 }
-.desktop-nav a[aria-current='page']::after {
+.desktop-nav a::after {
   content: '';
   position: absolute;
   bottom: -3px;
@@ -169,6 +178,12 @@ button:focus-visible {
   width: 100%;
   left: 0;
   background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms var(--ease-out);
+}
+.desktop-nav a[aria-current='page']::after {
+  transform: scaleX(1);
 }
 .mobile-nav {
   display: none;
@@ -178,6 +193,7 @@ button:focus-visible {
   isolation: isolate;
   height: min(900px, 100svh);
   min-height: 650px;
+  overflow: hidden;
 }
 .hero-image {
   position: absolute;
@@ -187,6 +203,7 @@ button:focus-visible {
   object-fit: cover;
   object-position: center;
   z-index: -2;
+  animation: image-settle 1800ms var(--ease-out) both;
 }
 .hero::after {
   content: '';
@@ -228,6 +245,8 @@ button:focus-visible {
 }
 .outline-button,
 .solid-button {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -241,9 +260,30 @@ button:focus-visible {
   letter-spacing: 0.025em;
   white-space: nowrap;
   border-radius: 0;
-  transition:
-    background-color 220ms ease,
-    color 220ms ease;
+  transition: transform 240ms var(--ease-out);
+}
+.outline-button::before,
+.solid-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--foreground);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.solid-button::before {
+  background: #fff6e7;
+}
+.outline-button > span[aria-hidden],
+.solid-button > span[aria-hidden] {
+  display: inline-block;
+  transition: transform 240ms var(--ease-out);
+}
+.outline-button:active,
+.solid-button:not(:disabled):active {
+  transform: scale(0.98);
+  transition-duration: 120ms;
 }
 .hero-copy .outline-button {
   margin-top: 32px;
@@ -260,10 +300,12 @@ button:focus-visible {
   align-items: center;
   width: fit-content;
   line-height: 1.5;
+  transition: transform 240ms var(--ease-out);
+  transform-origin: left center;
 }
 .text-link span {
   display: inline-block;
-  transition: transform 350ms var(--ease-out);
+  transition: transform 240ms var(--ease-out);
 }
 .section-label {
   color: var(--taupe);
@@ -350,19 +392,34 @@ button:focus-visible {
   width: 44px;
 }
 @media (hover: hover) and (pointer: fine) {
-  .outline-button:hover {
-    background: rgb(107 86 68 / 7%);
+  .outline-button:hover,
+  .solid-button:not(:disabled):hover {
+    transform: translateY(-2px) scale(1.015);
   }
-  .solid-button:hover {
-    background: #7b6755;
+  .outline-button:hover::before {
+    opacity: 0.06;
   }
-  .text-link:hover span {
-    transform: translateX(4px);
+  .solid-button:not(:disabled):hover::before {
+    opacity: 0.1;
   }
-  .desktop-nav a:hover {
-    text-decoration: underline;
-    text-underline-offset: 7px;
-    text-decoration-thickness: 1px;
+  .text-link:hover {
+    transform: translateY(-1px) scale(1.015);
+  }
+  .text-link:hover span,
+  .outline-button:hover > span[aria-hidden],
+  .solid-button:not(:disabled):hover > span[aria-hidden] {
+    transform: translateX(5px);
+  }
+  .desktop-nav a:hover::after {
+    transform: scaleX(1);
+  }
+}
+@media (max-width: 900px) {
+  .site-header .desktop-nav {
+    display: none;
+  }
+  .site-header .mobile-nav {
+    display: block;
   }
 }
 @media (max-width: 1000px) {
@@ -383,6 +440,11 @@ button:focus-visible {
   .site-header {
     height: 72px;
     padding: 0 23px;
+  }
+  .header-over-hero {
+    inset: 12px 12px auto;
+    padding-inline: 18px;
+    height: 64px;
   }
   .wordmark {
     font-size: 32px;
@@ -430,7 +492,8 @@ button:focus-visible {
   .outline-button,
   .solid-button {
     font-size: 18px;
-    padding: 15px 27px;
+    padding: 15px 22px;
+    gap: 12px;
   }
   .split-section {
     grid-template-columns: 1fr;
@@ -474,6 +537,13 @@ button:focus-visible {
 }
 .home-services {
   text-align: center;
+  max-width: none;
+  background: #f1eae0;
+  border-block: 1px solid var(--border);
+}
+.home-services .service-grid {
+  max-width: 1440px;
+  margin-inline: auto;
 }
 .home-services h2,
 .project-cta h2 {
@@ -490,6 +560,7 @@ button:focus-visible {
   margin-top: 58px;
 }
 .service-card {
+  height: 100%;
   background: var(--card);
   border: 1px solid #e6ddd3;
   box-shadow: 0 4px 22px rgb(107 86 68 / 5%);
@@ -522,6 +593,10 @@ button:focus-visible {
   font-size: clamp(29px, 2.25vw, 34px);
   line-height: 1.12;
   margin: 12px 0 18px;
+  min-height: 2.24em;
+}
+.service-title-line {
+  display: block;
 }
 .service-card p {
   font-size: 20px;
@@ -551,8 +626,43 @@ button:focus-visible {
   object-position: 48% center;
 }
 .project-cta {
+  position: relative;
   text-align: center;
   padding: 125px 7% 135px;
+  background: #eee4d7;
+  border-top: 1px solid var(--border);
+}
+.section-flourish {
+  display: block;
+  width: 72px;
+  height: 1px;
+  margin: 0 auto 38px;
+  background: var(--taupe);
+  transition: transform 900ms var(--ease-out);
+}
+.project-cta .reveal[data-reveal='waiting'] .section-flourish {
+  transform: scaleX(0.35);
+}
+.featured-cta {
+  min-height: 62px;
+  padding-inline: 40px;
+  box-shadow: 0 8px 24px rgb(107 86 68 / 12%);
+}
+.featured-cta::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 1px solid rgb(107 86 68 / 24%);
+  opacity: 0;
+  transform: scale(0.98);
+  transition:
+    opacity 240ms ease,
+    transform 240ms var(--ease-out);
+  pointer-events: none;
+}
+.featured-cta:focus-visible::after {
+  opacity: 1;
+  transform: scale(1);
 }
 .project-cta h2 {
   max-width: 760px;
@@ -815,15 +925,49 @@ button:focus-visible {
   opacity: 1;
   transform: translateY(0);
   transition:
-    opacity 700ms ease-out,
+    opacity 700ms var(--ease-out),
     transform 700ms var(--ease-out);
 }
 .reveal[data-reveal='waiting'] {
   opacity: 0;
   transform: translateY(15px);
 }
-.hero-copy {
+.hero-copy > * {
   animation: hero-entrance 850ms var(--ease-out) both;
+}
+.hero-copy .hero-rule {
+  animation-delay: 60ms;
+}
+.hero-copy > p {
+  animation-delay: 120ms;
+}
+.hero-copy .hero-action {
+  animation-delay: 180ms;
+}
+.image-reveal img {
+  transform: scale(1);
+  transition: transform 1200ms var(--ease-out);
+}
+.image-reveal[data-reveal='waiting'] img {
+  transform: scale(1.035);
+}
+@keyframes header-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes image-settle {
+  from {
+    transform: scale(1.025);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 @keyframes hero-entrance {
   from {
@@ -836,6 +980,14 @@ button:focus-visible {
   }
 }
 @media (hover: hover) and (pointer: fine) {
+  .featured-cta:hover::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .outline-button:active,
+  .solid-button:not(:disabled):active {
+    transform: scale(0.98);
+  }
   .service-card:hover .service-image img {
     transform: scale(1.025);
   }
@@ -848,7 +1000,8 @@ button:focus-visible {
 }
 @media (min-width: 768px) and (max-width: 1100px) {
   .service-grid {
-    gap: 18px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
   }
   .service-card-copy {
     padding: 22px 16px;
@@ -898,6 +1051,13 @@ button:focus-visible {
   }
   .service-card h3 {
     font-size: 34px;
+    min-height: 0;
+  }
+  .service-title-line {
+    display: inline;
+  }
+  .service-card-reveal {
+    transition-delay: 0ms !important;
   }
   .service-card p {
     font-size: 22px;
@@ -1010,9 +1170,28 @@ button:focus-visible {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .header-over-hero,
+  .hero-image,
+  .hero-copy > * {
+    animation: none;
+  }
+  .reveal,
   .reveal[data-reveal='waiting'] {
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
+    transition-delay: 0ms !important;
+  }
+  .outline-button,
+  .solid-button,
+  .text-link,
+  .outline-button span,
+  .solid-button span,
+  .text-link span,
+  .image-reveal img,
+  .service-image img,
+  .section-flourish,
+  .featured-cta::after {
+    transform: none !important;
   }
 }
 .contact-page {
