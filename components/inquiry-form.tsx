@@ -69,7 +69,7 @@ export function InquiryForm() {
   const requestId = useRef('');
   const busyRef = useRef(false);
   const uncertainRef = useRef(false);
-  const resultRef = useRef<HTMLOutputElement>(null);
+  const resultRef = useRef<HTMLElement>(null);
   useEffect(() => {
     if (received) resultRef.current?.focus();
   }, [received]);
@@ -268,10 +268,11 @@ export function InquiryForm() {
   }
   if (received)
     return (
-      <output
+      <section
         className="inquiry-success"
         ref={resultRef}
         tabIndex={-1}
+        role="status"
         aria-live="polite"
       >
         <span className="success-rule" />
@@ -287,7 +288,7 @@ export function InquiryForm() {
         <Link className="text-link" href="/services">
           EXPLORE OUR SERVICES <span aria-hidden="true">→</span>
         </Link>
-      </output>
+      </section>
     );
   const needsPlan =
     service === 'space-planning' ||
@@ -359,9 +360,9 @@ export function InquiryForm() {
             required: true,
             placeholder: 'Your furnishing budget, or still deciding',
           })}
-          {input('timeline', 'Ideal project start', {
+          {input('timeline', 'Preferred design completion date', {
             required: true,
-            placeholder: 'e.g. This month, within 3 months, or flexible',
+            placeholder: 'e.g. Within 8 weeks, before a move, or flexible',
           })}
           <div className="form-field full-field">
             <label htmlFor="description">

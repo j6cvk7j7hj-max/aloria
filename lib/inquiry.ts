@@ -15,7 +15,7 @@ export const inquirySchema = z.object({
   room: required('your room type'),
   dimensions: required('approximate room dimensions'),
   budget: required('your budget range'),
-  timeline: required('your ideal project start'),
+  timeline: required('your preferred design completion date'),
   description: required('a short project description', 4000),
   ceiling: optional,
   windows: optional,

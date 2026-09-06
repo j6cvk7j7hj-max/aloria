@@ -85,7 +85,7 @@ function readableRecord(inquiry) {
     ['Room / job', inquiry.details?.room],
     ['Approximate dimensions', inquiry.details?.dimensions],
     ['Budget range', inquiry.details?.budget],
-    ['Ideal project start', inquiry.details?.timeline],
+    ['Preferred design completion date', inquiry.details?.timeline],
     ['Project description', inquiry.details?.description],
     ['Ceiling height', inquiry.details?.ceiling],
     ['Window dimensions', inquiry.details?.windows],
