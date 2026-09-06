@@ -29,7 +29,7 @@ export function parseJson<T>(value: string, fallback: T): T {
 export function serviceName(slug: string) {
   return (
     services.find((service) => service.slug === slug)?.title ||
-    (slug === 'not-sure' ? 'Guidance requested' : slug)
+    (slug === 'not-sure' ? 'Service recommendation requested' : slug)
   );
 }
 

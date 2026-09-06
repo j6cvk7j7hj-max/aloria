@@ -1426,6 +1426,10 @@ button:focus-visible {
   clip-path: inset(50%);
 }
 .inquiry-success {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 55px 0;
 }
 .inquiry-success:focus {
@@ -1438,10 +1442,23 @@ button:focus-visible {
   background: var(--foreground);
   margin-bottom: 40px;
 }
+.inquiry-success .section-label {
+  margin: 0;
+}
 .inquiry-success h2 {
-  font-size: 54px;
-  line-height: 1.1;
-  margin-bottom: 28px;
+  max-width: 12ch;
+  margin: 18px 0 0;
+  font-size: clamp(44px, 4.2vw, 54px);
+  line-height: 1.08;
+}
+.inquiry-success-copy {
+  max-width: 590px;
+  margin: 26px 0 0;
+  font-size: 22px;
+  line-height: 1.55;
+}
+.inquiry-success-copy + .inquiry-success-copy {
+  margin-top: 14px;
 }
 .inquiry-success .text-link {
   margin-top: 40px;
@@ -1502,8 +1519,4 @@ button:focus-visible {
 .aloria-menu {
   overflow-y: auto;
   overscroll-behavior: contain;
-}
-
-.inquiry-success {
-  display: block;
 }

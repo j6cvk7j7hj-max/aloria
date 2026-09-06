@@ -5,7 +5,7 @@ The public form saves each valid inquiry to Aloria’s private Sites database an
 ## What the client experiences
 
 1. A visitor can enter on the homepage, Services page, a specific service page, About page, or a shared link. Every page has direct navigation to Services and Contact.
-2. A service-page button opens Contact with that service already selected. The visitor can change it or choose “I’d love your guidance.”
+2. A service-page button opens Contact with that service already selected. The visitor can change it or choose “Not sure — help me choose a service.”
 3. The form asks for contact information, location, room or job, dimensions, budget, timing, and a project description. Optional planning details and up to four photos help Mia understand the space.
 4. Client and browser validation catches missing or invalid fields. The server separately validates the values, file types, file signatures, sizes, and allowed website origin.
 5. After the database row and private photo objects are saved, the page confirms receipt. Mia then reviews the inquiry and replies to the client’s supplied email address.

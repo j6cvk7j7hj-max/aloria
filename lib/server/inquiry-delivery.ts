@@ -33,7 +33,7 @@ const labels: Record<string, string> = {
   room: 'Room / job',
   dimensions: 'Approximate dimensions',
   budget: 'Budget range',
-  timeline: 'Desired timeline',
+  timeline: 'Ideal project start',
   description: 'Project description',
   ceiling: 'Ceiling height',
   windows: 'Window dimensions',

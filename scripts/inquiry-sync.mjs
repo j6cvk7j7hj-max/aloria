@@ -53,7 +53,7 @@ function serviceName(slug) {
       'concept-board': 'Concept Board',
       'furniture-curation': 'Furniture Curation',
       'signature-design': 'Signature Design',
-      'not-sure': 'Guidance Requested',
+      'not-sure': 'Service Recommendation Requested',
     }[slug] || safeSegment(slug, 'Design Service')
   );
 }
@@ -85,7 +85,7 @@ function readableRecord(inquiry) {
     ['Room / job', inquiry.details?.room],
     ['Approximate dimensions', inquiry.details?.dimensions],
     ['Budget range', inquiry.details?.budget],
-    ['Desired timeline', inquiry.details?.timeline],
+    ['Ideal project start', inquiry.details?.timeline],
     ['Project description', inquiry.details?.description],
     ['Ceiling height', inquiry.details?.ceiling],
     ['Window dimensions', inquiry.details?.windows],

@@ -268,14 +268,21 @@ export function InquiryForm() {
   }
   if (received)
     return (
-      <output className="inquiry-success" ref={resultRef} tabIndex={-1}>
+      <output
+        className="inquiry-success"
+        ref={resultRef}
+        tabIndex={-1}
+        aria-live="polite"
+      >
         <span className="success-rule" />
-        <p className="section-label">THANK YOU</p>
-        <h2>Your project begins here.</h2>
-        <p>
-          Your inquiry and any photos have been received. Thank you for sharing
-          your vision with Aloria. Mia will review your details and reply to the
-          email address you provided.
+        <p className="section-label">INQUIRY RECEIVED</p>
+        <h2>Thank you for sharing your space.</h2>
+        <p className="inquiry-success-copy">
+          Your project details and any photos are safely with Mia.
+        </p>
+        <p className="inquiry-success-copy">
+          Mia will review everything and reply to the email address you provided
+          with the best next step.
         </p>
         <Link className="text-link" href="/services">
           EXPLORE OUR SERVICES <span aria-hidden="true">→</span>
@@ -320,7 +327,7 @@ export function InquiryForm() {
           })}
           <div className="form-field">
             <label htmlFor="service">
-              Service interested in <span aria-hidden="true">*</span>
+              Which service interests you? <span aria-hidden="true">*</span>
             </label>
             <NativeSelect
               id="service"
@@ -336,7 +343,7 @@ export function InquiryForm() {
                 </NativeSelectOption>
               ))}
               <NativeSelectOption value="not-sure">
-                I’d love your guidance
+                Not sure — help me choose a service
               </NativeSelectOption>
             </NativeSelect>
           </div>
@@ -352,9 +359,9 @@ export function InquiryForm() {
             required: true,
             placeholder: 'Your furnishing budget, or still deciding',
           })}
-          {input('timeline', 'Desired timeline', {
+          {input('timeline', 'Ideal project start', {
             required: true,
-            placeholder: 'When would you like to begin?',
+            placeholder: 'e.g. This month, within 3 months, or flexible',
           })}
           <div className="form-field full-field">
             <label htmlFor="description">
