@@ -272,7 +272,6 @@ export function InquiryForm() {
         className="inquiry-success"
         ref={resultRef}
         tabIndex={-1}
-        role="status"
         aria-live="polite"
       >
         <span className="success-rule" />
@@ -344,7 +343,7 @@ export function InquiryForm() {
                 </NativeSelectOption>
               ))}
               <NativeSelectOption value="not-sure">
-                Not sure — help me choose a service
+                Help me choose a service
               </NativeSelectOption>
             </NativeSelect>
           </div>
@@ -358,11 +357,11 @@ export function InquiryForm() {
           })}
           {input('budget', 'Budget range', {
             required: true,
-            placeholder: 'Your furnishing budget, or still deciding',
+            placeholder: 'e.g. $5,000–$10,000',
           })}
           {input('timeline', 'Preferred design completion date', {
             required: true,
-            placeholder: 'e.g. Within 8 weeks, before a move, or flexible',
+            placeholder: 'e.g. Within 8 weeks',
           })}
           <div className="form-field full-field">
             <label htmlFor="description">
